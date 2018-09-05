@@ -17,6 +17,12 @@ print(game)
 game.pop()
 print(game)
 
+lis = ["a", "b", "c"]
+del lis[0]
+lis.remove("b")
+lis.pop()
+
+
 game.pop(1)
 print(game)
 
