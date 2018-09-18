@@ -47,6 +47,14 @@ class ClassFour(ClassThree):
 def func():
     print("<func> function func")
 
+'''
+很多时候，模块或者说脚本会像一个标准的程序样直接运行，也就是类似python test.py这种方式，
+在这种情况下, __name__ 的值将是一个特别缺省值"__main__"。
+
+根据上面的特性，可以用if __name__ == '__main__'来判断是否是在直接运行该py文件！
+如果是，那么if代码块下的语句就会被执行，如果不是，就不执行。
+该方法常用于对模块进行测试和调试，区分直接运行和被导入两种情况的不同执行方式！
+'''
 if __name__ == '__main__':                      # 7
     print('<[11]> ClassOne tests', 30 * '.')    # 8
     one = ClassOne()                            # 9
