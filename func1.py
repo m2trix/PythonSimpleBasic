@@ -128,3 +128,57 @@ def studentB(name, age=10, *args, sex, classroom, **kwargs):
     pass
 
 studentB(name="jack", age=18, sex='male', classroom="202", k1="v1")
+
+# 1.5 变量作用域
+# Python的作用域一共有4层，分别是：
+# L （Local） 局部作用域
+# E （Enclosing） 闭包函数外的函数中
+# G （Global） 全局作用域
+# B （Built-in） 内建作用域
+#
+# 以 L –> E –> G –>B 的规则查找变量
+
+# 示例1：
+a = 1
+print("函数outer调用之前全局变量a的内存地址： ", id(a))
+
+def outer1():
+    a = 2
+    print("函数outer调用之时闭包外部的变量a的内存地址： ", id(a))
+    def inner():
+        a = 3
+        print("函数inner调用之后闭包内部变量a的内存地址： ", id(a))
+    inner()
+    print("函数inner调用之后，闭包外部的变量a的内存地址： ", id(a))
+outer1()
+print("函数outer执行完毕，全局变量a的内存地址： ", id(a))
+
+# 示例2：
+a = 1
+print("函数outer调用之前全局变量a的内存地址： ", id(a))
+def outer2():
+    a = 2
+    print("函数outer调用之时闭包外部的变量a的内存地址： ", id(a))
+    def inner():
+        global a   # 注意这行
+        a = 3
+        print("函数inner调用之后闭包内部变量a的内存地址： ", id(a))
+    inner()
+    print("函数inner调用之后，闭包外部的变量a的内存地址： ", id(a))
+outer2()
+print("函数outer执行完毕，全局变量a的内存地址： ", id(a))
+
+# 示例3：
+a = 1
+print("函数outer调用之前全局变量a的内存地址： ", id(a))
+def outer3():
+    a = 2
+    print("函数outer调用之时闭包外部的变量a的内存地址： ", id(a))
+    def inner():
+        nonlocal a   # 注意这行
+        a = 3
+        print("函数inner调用之后闭包内部变量a的内存地址： ", id(a))
+    inner()
+    print("函数inner调用之后，闭包外部的变量a的内存地址： ", id(a))
+outer3()
+print("函数outer执行完毕，全局变量a的内存地址： ", id(a))
